@@ -82,8 +82,8 @@ class AuthService {
       //   verification_required: false
       // }
 
-      const token = data?.data?.access_token;
-      const user = data?.data?.user;
+      const token = data?.access_token;
+      const user = data?.user;
 
       if (!token) {
         return {

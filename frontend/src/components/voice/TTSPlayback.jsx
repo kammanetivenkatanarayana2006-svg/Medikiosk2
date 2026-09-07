@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Button from '../ui/Button';
+import { voiceService } from '../../services/voice';
 import styles from './TTSPlayback.module.css';
 
 const TTSPlayback = ({ 
@@ -22,6 +23,13 @@ const TTSPlayback = ({
       }
     };
   }, [audioUrl]);
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+      setPlaying(true);
+    }
+  };
   
   const handlePlay = async () => {
     if (audioUrl && audioRef.current) {
@@ -43,14 +51,7 @@ const TTSPlayback = ({
     
     if (result.success) {
       setAudioUrl(result.audioUrl);
-      // Auto-play after URL set
-      setTimeout(() => {
-        if (audioRef.current) {
-          audioRef.current.src = result.audioUrl;
-          audioRef.current.play();
-          setPlaying(true);
-        }
-      }, 100);
+      setPlaying(true);
     } else {
       setError(result.error);
     }
@@ -68,6 +69,8 @@ const TTSPlayback = ({
     <div className={`${styles.container} ${className}`} {...props}>
       <audio
         ref={audioRef}
+        src={audioUrl || undefined}
+        onLoadedData={playAudio}
         onEnded={() => setPlaying(false)}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}

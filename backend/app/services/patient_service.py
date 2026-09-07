@@ -4,6 +4,7 @@ Patient service for profile operations.
 from typing import Optional, Dict, Any
 from app.db.repositories.patient_repository import patient_repository
 from app.models.patient import PatientProfileUpdate
+from app.services.storage.photo_storage import photo_storage_service
 import logging
 
 logger = logging.getLogger(__name__)

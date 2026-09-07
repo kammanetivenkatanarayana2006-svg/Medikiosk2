@@ -3,6 +3,7 @@ Consultation API endpoints.
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.api.dependencies.auth import require_authenticated_user
+from app.api.serializers import serialize_doc, serialize_docs
 from app.models.consultation import ConsultationCreate
 from app.services.consultation_service import consultation_service
 import logging
@@ -58,7 +59,7 @@ async def get_consultation(
     
     return {
         "success": True,
-        "data": result["consultation"],
+        "data": serialize_doc(result["consultation"]),
     }
 
 @router.get("")
@@ -78,5 +79,5 @@ async def get_my_consultations(
     
     return {
         "success": True,
-        "data": result["consultations"],
+        "data": serialize_docs(result["consultations"]),
     }

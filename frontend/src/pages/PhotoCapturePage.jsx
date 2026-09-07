@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import { patientService } from '../services/patient';
 import styles from './PhotoCapturePage.module.css';
 
 const PhotoCapturePage = () => {

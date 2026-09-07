@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import Badge from "../ui/Badge";
 import { useConsultation } from "../../contexts/ConsultationContext";
 import { consultationService } from "../../services/consultation";
+import { interviewService } from "../../services/interviews";
 import styles from "./ConsultationReady.module.css";
 
 const LANGUAGE_LABELS = {

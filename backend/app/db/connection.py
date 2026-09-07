@@ -5,6 +5,7 @@ Handles client lifecycle, connection pooling, and graceful degradation.
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from typing import Optional, Dict, Any
 import logging
+import time
 from contextlib import asynccontextmanager
 from app.core.config import settings
 

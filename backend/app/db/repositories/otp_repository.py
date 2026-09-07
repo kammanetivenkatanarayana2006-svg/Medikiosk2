@@ -24,7 +24,15 @@ class OTPRepository(DatabaseRepository):
         try:
             collection = mongo_connection.database["otp_verifications"]
             await collection.create_index("user_id")
-            await collection.create_index("created_at")
+
+            # Drop legacy non-TTL "created_at_1" index if present, so the TTL
+            # index below can be created without an IndexOptionsConflict.
+            for index in await collection.list_indexes().to_list(length=None):
+                if index.get("name") == "created_at_1" and "expireAfterSeconds" not in index:
+                    logger.info("Dropping legacy non-TTL index 'created_at_1'")
+                    await collection.drop_index("created_at_1")
+                    break
+
             await collection.create_index([("created_at", 1)], expireAfterSeconds=600)  # TTL for cleanup
             logger.info("OTP indexes created")
         except Exception as e:

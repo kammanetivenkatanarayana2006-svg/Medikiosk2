@@ -10,6 +10,7 @@ from app.ai.clinical_extraction_prompt import (
 )
 from app.db.repositories.clinical_extraction_repository import clinical_extraction_repository
 from app.db.repositories.interview_repository import interview_repository
+from app.db.connection import mongo_connection
 from app.models.clinical_history import (
     ClinicalHistoryExtraction,
     ExtractedField,

@@ -3,6 +3,7 @@ AYUSH API endpoints.
 """
 from fastapi import APIRouter, Depends, HTTPException
 from app.api.dependencies.auth import require_authenticated_user
+from app.api.serializers import serialize_doc
 from app.models.ayush import AYUSHUpdate
 from app.services.ayush_service import ayush_service
 import logging
@@ -27,7 +28,7 @@ async def get_ayush_record(
     
     return {
         "success": True,
-        "data": result["record"],
+        "data": serialize_doc(result["record"]),
     }
 
 @router.put("/{consultation_id}/ayush")
@@ -52,5 +53,5 @@ async def update_ayush_record(
     return {
         "success": True,
         "message": result["message"],
-        "data": result["record"],
+        "data": serialize_doc(result["record"]),
     }

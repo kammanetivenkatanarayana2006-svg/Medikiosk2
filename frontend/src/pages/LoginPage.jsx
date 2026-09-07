@@ -97,7 +97,7 @@ const LoginPage = () => {
       }
 
       // Correct route from AppRoutes.jsx
-      navigate("/patient-home");
+      navigate("/patient/home");
     } catch (error) {
       console.error("Login failed:", error);
 

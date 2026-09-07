@@ -3,6 +3,7 @@ Clinical history API endpoints.
 """
 from fastapi import APIRouter, Depends, HTTPException
 from app.api.dependencies.auth import require_authenticated_user
+from app.api.serializers import serialize_doc
 from app.models.clinical_history import ClinicalExtractionCreate
 from app.services.clinical_extraction_service import clinical_extraction_service
 import logging
@@ -33,7 +34,7 @@ async def extract_clinical_information(
     return {
         "success": True,
         "message": result["message"],
-        "data": result["extraction"],
+        "data": serialize_doc(result["extraction"]),
     }
 
 @router.get("/{interview_id}/structured")

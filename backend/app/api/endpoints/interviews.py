@@ -3,6 +3,7 @@ Interview API endpoints.
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.api.dependencies.auth import require_authenticated_user
+from app.api.serializers import serialize_doc
 from app.models.interview import InterviewCreate, InterviewResponse
 from app.services.interview_service import interview_service
 import logging
@@ -56,8 +57,8 @@ async def get_interview(
     return {
         "success": True,
         "data": {
-            "interview": result["interview"],
-            "responses": result["responses"],
+            "interview": serialize_doc(result["interview"]),
+            "responses": [serialize_doc(r) for r in result["responses"]],
             "current_question": result["current_question"],
             "progress": result["progress"],
         }

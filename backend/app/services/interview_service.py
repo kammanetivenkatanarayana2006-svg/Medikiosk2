@@ -165,8 +165,14 @@ class InterviewService:
         if interview.get("status") not in ["in_progress", "ready"]:
             return {"success": False, "error": "Interview is not active.", "status_code": 400}
         
+        # Follow-up and AI clarification answers use client-generated IDs
+        # that are not part of INTERVIEW_QUESTIONS and do not advance the
+        # interview. They are recorded as extra responses against the
+        # current state.
+        is_clarification = question_id.startswith("followup_") or question_id.startswith("ai_")
+        
         # Verify question matches current question
-        if question_id != interview.get("current_question_id"):
+        if not is_clarification and question_id != interview.get("current_question_id"):
             return {"success": False, "error": "Invalid question for current state.", "status_code": 400}
         
         # Check if already answered
@@ -176,8 +182,10 @@ class InterviewService:
         
         # Get question definition
         question = get_question_by_id(question_id)
-        if not question:
+        if not question and not is_clarification:
             return {"success": False, "error": "Question not found.", "status_code": 404}
+        
+        section = question.get("section") if question else interview.get("current_section", "")
         
         # Save response
         saved = await interview_repository.save_response(
@@ -186,11 +194,23 @@ class InterviewService:
             response_text=response_text.strip(),
             input_method=input_method,
             language=interview.get("language", "english"),
-            section=question.get("section"),
+            section=section,
         )
         
         if not saved:
             return {"success": False, "error": "Failed to save response.", "status_code": 500}
+        
+        if is_clarification:
+            # Keep the current question pending - the interview advances
+            # only when a standard question is answered.
+            return {
+                "success": True,
+                "message": "Response saved",
+                "response_id": str(saved["_id"]),
+                "next_question_id": interview.get("current_question_id"),
+                "next_section": interview.get("current_section"),
+                "progress": interview.get("progress", 0),
+            }
         
         # Get next question
         next_question = get_next_question(question_id)
@@ -213,6 +233,7 @@ class InterviewService:
             return {
                 "success": True,
                 "message": "Response saved",
+                "response_id": str(saved["_id"]),
                 "next_question_id": next_question["question_id"],
                 "next_section": next_question["section"],
                 "progress": round(progress, 1),
@@ -231,6 +252,7 @@ class InterviewService:
             return {
                 "success": True,
                 "message": "Interview completed",
+                "response_id": str(saved["_id"]),
                 "completed": True,
                 "progress": 100.0,
             }

@@ -220,7 +220,7 @@ function App() {
                   path="/consultation/:consultationId/ayush"
                   element={
                     <ProtectedRoute>
-                      <AYUSHFormWrapper />
+                      <AYUSHForm />
                     </ProtectedRoute>
                   }
                 />

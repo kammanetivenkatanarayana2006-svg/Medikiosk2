@@ -4,6 +4,7 @@ Medical document API endpoints.
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from typing import Optional
 from app.api.dependencies.auth import require_authenticated_user
+from app.api.serializers import serialize_doc, serialize_docs
 from app.services.medical_document_service import medical_document_service
 import logging
 
@@ -54,7 +55,7 @@ async def get_my_documents(current_user: dict = Depends(require_authenticated_us
     
     return {
         "success": True,
-        "data": result["documents"],
+        "data": serialize_docs(result["documents"]),
     }
 
 @router.get("/{document_id}")
@@ -73,7 +74,7 @@ async def get_document(
     
     return {
         "success": True,
-        "data": result["document"],
+        "data": serialize_doc(result["document"]),
     }
 
 @router.get("/{document_id}/ocr")
@@ -92,7 +93,7 @@ async def get_document_ocr(
     
     return {
         "success": True,
-        "data": result["ocr_result"],
+        "data": serialize_doc(result["ocr_result"]),
     }
 
 @router.delete("/{document_id}")

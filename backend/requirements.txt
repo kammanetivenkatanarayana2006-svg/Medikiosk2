@@ -10,6 +10,7 @@ python-jose[cryptography]==3.3.0
 email-validator==2.1.0
 python-magic-bin
 python-multipart
+aiofiles
 aiohttp
 # OCR dependencies (optional, for document processing)
 pytesseract==0.3.10

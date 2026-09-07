@@ -118,11 +118,14 @@ class LongitudinalHistoryService:
         """Build summary for a consultation."""
         consultation_id = str(consultation["_id"])
         
-        # Check for clinical history
-        extractions = await clinical_extraction_repository.find_by_interview_id(
-            consultation.get("_id", "")
-        )
-        has_clinical_history = len(extractions) > 0
+        # Check for clinical history via the interview for this consultation
+        interview = await interview_repository.find_by_consultation_id(consultation_id)
+        has_clinical_history = False
+        if interview:
+            extractions = await clinical_extraction_repository.find_by_interview_id(
+                str(interview["_id"])
+            )
+            has_clinical_history = len(extractions) > 0
         
         # Count documents
         documents = await medical_document_repository.find_by_patient_id(patient_id)

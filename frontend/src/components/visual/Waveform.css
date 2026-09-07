@@ -1,0 +1,25 @@
+.waveform-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 36px;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.waveform-bar {
+  width: 3px;
+  background: linear-gradient(180deg, var(--cyan-bright) 0%, var(--blue-medical) 100%);
+  border-radius: 2px;
+  animation: waveMotion 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes waveMotion {
+  0% { transform: scaleY(0.3); opacity: 0.5; }
+  100% { transform: scaleY(1.1); opacity: 1; }
+}

@@ -1,0 +1,98 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-6);
+  gap: var(--space-6);
+  background: linear-gradient(135deg, 
+    var(--color-bg) 0%, 
+    var(--color-surface) 100%);
+  position: relative;
+}
+
+.themeToggle {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+}
+
+.mainCard {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  margin-top: var(--space-12);
+}
+
+.logo {
+  font-size: 4rem;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.phaseBadge {
+  margin-bottom: var(--space-4);
+}
+
+.componentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cardTitle {
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+}
+
+.componentRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+  
+  .mainCard {
+    margin-top: var(--space-10);
+  }
+  
+  .logo {
+    font-size: 3rem;
+  }
+  
+  .componentsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .componentRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-base);
+  }
+}

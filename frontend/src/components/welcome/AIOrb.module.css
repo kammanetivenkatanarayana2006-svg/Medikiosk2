@@ -1,0 +1,143 @@
+.orbContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbOuter {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-primary-subtle);
+  border: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.orbMiddle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbCore {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  position: relative;
+}
+
+.orbPulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: orb-pulse 2s var(--ease-in-out) infinite;
+}
+
+.orbRing1,
+.orbRing2 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+  opacity: 0.3;
+}
+
+.orbRing1 {
+  width: 160px;
+  height: 160px;
+  animation: ring-rotate 4s linear infinite;
+}
+
+.orbRing2 {
+  width: 180px;
+  height: 180px;
+  border-style: dashed;
+  animation: ring-rotate 6s linear infinite reverse;
+}
+
+.orbParticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: particle-orbit 3s var(--ease-in-out) infinite;
+}
+
+.active .orbCore {
+  animation: core-breathe 3s var(--ease-in-out) infinite;
+}
+
+@keyframes orb-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+@keyframes ring-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes particle-orbit {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes core-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbPulse,
+  .orbRing1,
+  .orbRing2,
+  .particle,
+  .active .orbCore {
+    animation: none;
+  }
+}

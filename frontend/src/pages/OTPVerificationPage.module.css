@@ -1,0 +1,100 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, 
+    var(--color-bg) 0%, 
+    var(--color-surface) 100%);
+}
+
+.card {
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.error {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.otpContainer {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-bottom: var(--space-6);
+}
+
+.otpInput {
+  width: 52px;
+  height: 56px;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: all var(--transition-fast) var(--ease-in-out);
+}
+
+.otpInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+}
+
+.otpInput:disabled {
+  opacity: 0.5;
+}
+
+.verifyButton {
+  margin-bottom: var(--space-4);
+}
+
+.resendContainer {
+  text-align: center;
+}
+
+.cooldown {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.resendButton {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font-size: var(--font-size-base);
+}
+
+.resendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .otpInput {
+    width: 42px;
+    height: 48px;
+    font-size: var(--font-size-lg);
+  }
+}

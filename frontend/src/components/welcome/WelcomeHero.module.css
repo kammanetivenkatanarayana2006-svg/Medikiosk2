@@ -1,0 +1,66 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  max-width: 700px;
+}
+
+.title {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: var(--font-size-lg);
+}
+
+.highlight {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 30px var(--color-primary-subtle);
+  font-size: var(--font-size-5xl);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+}
+
+.animated .title {
+  animation: fade-in-down 0.8s var(--ease-out);
+}
+
+.animated .highlight {
+  animation: fade-in-up 1s var(--ease-out) 0.2s both;
+}
+
+.animated .subtitle {
+  animation: fade-in-up 1s var(--ease-out) 0.5s both;
+}
+
+@media (max-width: 768px) {
+  .highlight {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .title {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated .title,
+  .animated .highlight,
+  .animated .subtitle {
+    animation: none;
+  }
+}

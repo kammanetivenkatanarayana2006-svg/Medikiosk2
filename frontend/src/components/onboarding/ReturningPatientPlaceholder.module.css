@@ -1,0 +1,46 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, 
+    var(--color-bg) 0%, 
+    var(--color-surface) 100%);
+}
+
+.card {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-4);
+}
+
+.badge {
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.description {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4);
+  }
+  
+  .icon {
+    font-size: 3rem;
+  }
+}

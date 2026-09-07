@@ -1,0 +1,17 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+motor==3.3.2
+pymongo==4.6.0
+passlib[argon2]==1.7.4
+python-jose[cryptography]==3.3.0
+email-validator==2.1.0
+python-magic-bin
+python-multipart
+aiohttp
+# OCR dependencies (optional, for document processing)
+pytesseract==0.3.10
+Pillow==10.1.0
+PyPDF2==3.0.1

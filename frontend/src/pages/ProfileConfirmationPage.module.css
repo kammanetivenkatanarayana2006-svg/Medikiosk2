@@ -1,0 +1,15 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  padding: var(--space-6) var(--space-6) 0;
+}
+
+@media (max-width: 768px) {
+  .progress {
+    padding: var(--space-4) var(--space-4) 0;
+  }
+}

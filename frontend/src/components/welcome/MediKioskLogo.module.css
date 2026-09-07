@@ -1,0 +1,81 @@
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  user-select: none;
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.logoSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.logoCircle {
+  fill: var(--color-primary-subtle);
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+}
+
+.logoPath {
+  fill: none;
+  stroke: var(--color-primary);
+}
+
+.logoDot {
+  fill: var(--color-primary);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.logoName {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.logoSubtext {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.animated .logoMark {
+  animation: logo-entrance 1s var(--ease-out);
+}
+
+.animated .logoText {
+  animation: fade-in-up 1s var(--ease-out) 0.3s both;
+}
+
+@keyframes logo-entrance {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated .logoMark,
+  .animated .logoText {
+    animation: none;
+  }
+}
